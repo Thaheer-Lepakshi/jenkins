@@ -6,7 +6,7 @@ pipeline{
     stages{
         stage('Build'){
             when {
-                branch 'dev'   // only run if branch is develop
+                branch 'origin/dev'   // only run if branch is dev
             }
             steps{
                 echo 'Building..'
@@ -14,7 +14,7 @@ pipeline{
         }
         stage('Test'){
             when {
-                branch 'test'   // only run if branch is test
+                branch 'origin/test'   // only run if branch is test
             }
             steps{
                 echo 'Testing..'
@@ -22,7 +22,7 @@ pipeline{
         }
         stage('Deploy'){
             when {
-                branch 'main'   // only run if branch is main
+                branch 'origin/main'   // only run if branch is main
             }
             steps{
                 echo 'Deploying....'
