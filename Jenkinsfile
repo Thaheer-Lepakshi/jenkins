@@ -1,33 +1,41 @@
-pipeline{
+pipeline {
     agent any
     tools {
         maven 'my-maven'
     }
-    stages{
-        stage('Build'){
+    stages {
+        stage('Build') {
             when {
-                branch 'origin/dev'   // only run if branch is dev
+                anyOf {
+                    branch 'dev'
+                    branch 'origin/dev'
+                }
             }
-            steps{
-                echo 'Building..'
+            steps {
+                echo "Building on branch: ${env.BRANCH_NAME}"
             }
         }
-        stage('Test'){
+        stage('Test') {
             when {
-                branch 'origin/test'   // only run if branch is test
+                anyOf {
+                    branch 'test'
+                    branch 'origin/test'
+                }
             }
-            steps{
-                echo 'Testing..'
+            steps {
+                echo "Testing on branch: ${env.BRANCH_NAME}"
             }
         }
-        stage('Deploy'){
+        stage('Deploy') {
             when {
-                branch 'origin/main'   // only run if branch is main
+                anyOf {
+                    branch 'main'
+                    branch 'origin/main'
+                }
             }
-            steps{
-                echo 'Deploying....'
+            steps {
+                echo "Deploying on branch: ${env.BRANCH_NAME}"
             }
         }
     }
-
 }
