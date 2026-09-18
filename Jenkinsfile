@@ -5,21 +5,27 @@ pipeline {
     }
     stages {
         stage('Build') {
-            when { branch 'dev' }
+            when {
+                expression { env.GIT_BRANCH == 'origin/dev' }
+            }
             steps {
-                echo "Building on branch: ${env.BRANCH_NAME}"
+                echo "Building on branch: ${env.GIT_BRANCH}"
             }
         }
         stage('Test') {
-            when { branch 'test' }
+            when {
+                expression { env.GIT_BRANCH == 'origin/test' }
+            }
             steps {
-                echo "Testing on branch: ${env.BRANCH_NAME}"
+                echo "Testing on branch: ${env.GIT_BRANCH}"
             }
         }
         stage('Deploy') {
-            when { branch 'main' }
+            when {
+                expression { env.GIT_BRANCH == 'origin/main' }
+            }
             steps {
-                echo "Deploying on branch: ${env.BRANCH_NAME}"
+                echo "Deploying on branch: ${env.GIT_BRANCH}"
             }
         }
     }
