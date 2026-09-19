@@ -11,7 +11,6 @@ pipeline {
     }
 
     parameters {
-        choice(name: 'ENV', choices: ['dev', 'test', 'sandbox', 'prod'], description: 'Select the environment')
         choice(name: 'Version', choices: ['v1.0.0', 'v2.0.0'], description: 'Select the version')
         booleanParam(name: 'Deploy', defaultValue: true, description: 'Deploy to')
     }
@@ -42,18 +41,18 @@ pipeline {
         }
 
         stage('Deploy') {
-            env.ENV = input {
-                message "Are you sure you want to deploy to ${params.ENV}?"
-                ok "Yes, deploy"
+                input {
+                   message "Are you sure you want to deploy to ${params.ENV}?"
+                   ok "Yes, deploy"
                 parameters {
-                    choice(name: 'ENV', choices: ['de', 'te', 'sand', 'produ'], description: 'Select the environment')
-                    choice(name: 'Version', choices: ['v1', 'v2'], description: 'Select the version')
+                    choice(name: 'ENV', choices: ['dev', 'test', 'sandbox', 'production'], description: 'Select the environment')
                 }
             }
 
             steps {
                 script {
                     gv.deployApp()
+                    echo "deploying ${ENV}"
                 }
             }
         }
