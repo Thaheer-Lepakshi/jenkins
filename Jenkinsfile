@@ -1,4 +1,5 @@
 def gv
+
 pipeline {
     agent any
 
@@ -42,12 +43,17 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                env.ENV = input message: "select env", ok: "DONE", parameters [
-                    choice(name: 'ENV', choices: ['dev', 'test', 'sandbox', 'production'], description: 'Select the environment')
-                ]
                 script {
+                    env.ENV = input(
+                        message: "Select environment",
+                        ok: "DONE",
+                        parameters: [
+                            choice(name: 'ENV', choices: ['dev', 'test', 'sandbox', 'production'], description: 'Select the environment')
+                        ]
+                    )
+
                     gv.deployApp()
-                    echo "deploying ${ENV}"
+                    echo "deploying ${env.ENV}"
                 }
             }
         }
