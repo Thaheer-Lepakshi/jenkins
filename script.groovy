@@ -8,6 +8,8 @@ def testApp(){
 }
 def deployApp(){
     echo "Deploying the application..."
+    echo "version ${params.Version}"
+    echo "env ${params.ENV}"
 }
 
 return this
