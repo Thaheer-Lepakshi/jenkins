@@ -1,5 +1,6 @@
 def buildApp(){
     echo "Building the application..."
+    echo "building ${params.ENV}"
 }
 
 def testApp(){
