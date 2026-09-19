@@ -1,4 +1,4 @@
-
+def gv
 pipeline {
     agent any
 
@@ -42,6 +42,15 @@ pipeline {
         }
 
         stage('Deploy') {
+            input {
+                message "Are you sure you want to deploy to ${params.ENV}?"
+                ok "Yes, deploy"
+                parameters {
+                    choice(name: 'ENV', choices: ['de', 'te', 'sand', 'produ'], description: 'Select the environment')
+                    choice(name: 'Version', choices: ['v1', 'v2'], description: 'Select the version')
+                }
+            }
+
             steps {
                 script {
                     gv.deployApp()
