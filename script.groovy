@@ -6,10 +6,10 @@ def buildApp(){
 def testApp(){
     echo "Running tests..."
 }
-def deployApp(env1, version1) {
+def deployApp() {
     echo "Deploying the application..."
-    echo "version ${version1}"
-    echo "env ${env1}"
+    echo "version ${Version}"
+    echo "env ${ENV}"
 }
 
 return this
