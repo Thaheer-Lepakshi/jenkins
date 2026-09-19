@@ -46,8 +46,8 @@ pipeline {
                 message "Are you sure you want to deploy to ${params.ENV}?"
                 ok "Yes, deploy"
                 parameters {
-                    choice(name: 'ENV1', choices: ['de', 'te', 'sand', 'produ'], description: 'Select the environment')
-                    choice(name: 'Version1', choices: ['v1', 'v2'], description: 'Select the version')
+                    choice(name: 'ENV', choices: ['de', 'te', 'sand', 'produ'], description: 'Select the environment')
+                    choice(name: 'Version', choices: ['v1', 'v2'], description: 'Select the version')
                 }
             }
 
