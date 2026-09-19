@@ -42,7 +42,7 @@ pipeline {
         }
 
         stage('Deploy') {
-            input {
+            env.ENV = input {
                 message "Are you sure you want to deploy to ${params.ENV}?"
                 ok "Yes, deploy"
                 parameters {
